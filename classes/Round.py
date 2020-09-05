@@ -1,5 +1,3 @@
-#Single instance of a game in Fall Guys
-
 class Round:
 	"""docstring for Course"""
 	def __init__(self, name, startingParticipants, qualifyingParticipants, roundNumber, episodeNumber, playerScore):

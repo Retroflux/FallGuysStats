@@ -1,6 +1,3 @@
-#Player object that holds list of episodes and statistics
-
-# noinspection PyPep8Naming
 class Player:
     # TODO getter and setter for unique events
     totalUniqueEvents = 0
