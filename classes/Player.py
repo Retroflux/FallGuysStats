@@ -2,10 +2,13 @@
 
 # noinspection PyPep8Naming
 class Player:
+    # TODO getter and setter for unique events
+    totalUniqueEvents = 0
 
     def __init__(self, playerNumber):
         self._playerNumber = playerNumber
         self._episodeList = list()
+        self._eventList = list()
 
     @property
     def playerNumber(self):
@@ -15,6 +18,10 @@ class Player:
     def episodeList(self):
         return self._episodeList
 
+    @property
+    def eventList(self):
+        return self._eventList
+
     @playerNumber.setter
     def playerNumber(self, playerNumber):
         self._playerNumber = playerNumber
@@ -23,3 +30,6 @@ class Player:
     def episodeList(self, episodeList):
         self._episodeList = episodeList
 
+    @eventList.setter
+    def eventList(self,eventList):
+        self._eventList = eventList

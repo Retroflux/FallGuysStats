@@ -1,19 +1,14 @@
 from classes.Player import Player
 from classes.Episode import Episode
 from classes.Round import Round
-import csv
-import os
-import sys
 
-
-def main():
+def generatePlayerObjectFromFile(filePath,playerNumber):
     print("hello world")
     headerRow = True
 
-    CSV_Data = readListFromCSV("data/FallGuysStats.csv")
+    CSV_Data = readListFromCSV(filePath)
     print (len(CSV_Data))
-    playerObject = Player(1)
-
+    playerObject = Player(playerNumber)
 
     for line in CSV_Data:
         if headerRow:
@@ -24,14 +19,7 @@ def main():
         roundObjectList = generateRoundObjects(roundData,episodeNumber)
         playerObject.episodeList.append(Episode(len(roundObjectList),episodeNumber,finalScore,roundObjectList))
 
-    for episode in playerObject.episodeList:
-        print("EPISODE #" + str(episode.episodeNumber)+":")
-        print("FINAL SCORE:" + str(episode.finalPlayerScore))
-        for currentRound in episode.listOfRounds:
-            print("\t" + currentRound.name + "; SCORE:" + str(currentRound.playerScore))
-    # TODO output results to stdout
-
-    return
+    return playerObject
 
 
 def readListFromCSV(filePath):
@@ -41,6 +29,7 @@ def readListFromCSV(filePath):
             tempList.append(line.strip())
     return tempList
 
+
 def isolateCellsWithRoundDataAggregated(line):
 
      return(str(line.split(",")[0]), #timestamp
@@ -49,6 +38,7 @@ def isolateCellsWithRoundDataAggregated(line):
            str(line.split(",")[20]), #Round out
            str(line.split(",")[21]), #Final score
     )
+
 
 def generateRoundObjects(roundData,episodeNumber):
     roundObjects = list()
@@ -65,10 +55,7 @@ def generateRoundObjects(roundData,episodeNumber):
         remainingRoundData = remainingRoundData[3:]
     return roundObjects
 
+
 def verifyRoundNames(roundObj):
-    # TODO verification of round names
+    # TODO verification of round names``
     pass
-
-
-if __name__ == '__main__':
-    main()
