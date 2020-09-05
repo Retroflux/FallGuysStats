@@ -43,7 +43,7 @@ class Round:
 	def startingParticipants(self,startingParticipants):
 		self._startingParticipants=startingParticipants
 
-	@qualifyingParrticipants.setter
+	@qualifyingParticipants.setter
 	def qualifyingParticipants(self,qualifyingParticipants):
 		self._qualifyingParticipants = qualifyingParticipants
 
