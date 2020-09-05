@@ -11,12 +11,13 @@ class Episode:
     """docstring for Episode"""
     totalNumberOfEpisodes = 0
 
-    def __init__(self, numberOfRounds, episodeNumber, numberOfTeamGames, numberOfSoloGames, finalPlayerScore):
+    def __init__(self, numberOfRounds, episodeNumber, finalPlayerScore, listOfRounds, numberOfTeamGames=0, numberOfSoloGames=0):
         self._numberOfRounds = numberOfRounds
         self._episodeNumber = episodeNumber
         self._numberOfTeamGames = numberOfTeamGames
         self._numberOfSoloGames = numberOfSoloGames
         self._finalPlayerScore = finalPlayerScore
+        self._listOfRounds = listOfRounds
 
     @property
     def numberOfRounds(self):
@@ -38,6 +39,10 @@ class Episode:
     def finalPlayerScore(self):
         return self._finalPlayerScore
 
+    @property
+    def listOfRounds(self):
+        return self._listOfRounds
+
     @numberOfRounds.setter
     def numberOfRounds(self,numberOfRounds):
         self._numberOfRounds = numberOfRounds
@@ -57,3 +62,7 @@ class Episode:
     @finalPlayerScore.setter
     def finalPlayerScore(self,finalPlayerScore):
         self._finalPlayerScore = finalPlayerScore
+
+    @listOfRounds.setter
+    def listOfRounds(self,listOfRounds):
+        self._listOfRounds = listOfRounds

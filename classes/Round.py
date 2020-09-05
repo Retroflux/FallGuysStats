@@ -2,11 +2,10 @@
 
 class Round:
 	"""docstring for Course"""
-	def __init__(self,name,startingParticipants,qualifyingParrticipants,roundNumber, episodeNumber,playerScore):
-		super(Course, self).__init__()
+	def __init__(self, name, startingParticipants, qualifyingParticipants, roundNumber, episodeNumber, playerScore):
 		self._name = name
 		self._startingParticipants = startingParticipants
-		self._qualifyingParticipants = qualifyingParrticipants
+		self._qualifyingParticipants = qualifyingParticipants
 		self._roundNumber = roundNumber
 		self._episodeNumber = episodeNumber
 		self._playerScore = playerScore

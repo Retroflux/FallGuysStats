@@ -1,5 +1,6 @@
 from classes.Player import Player
 from classes.Episode import Episode
+from classes.Round import Round
 import csv
 import os
 import sys
@@ -7,21 +8,27 @@ import sys
 
 def main():
     print("hello world")
+    headerRow = True
 
     CSV_Data = readListFromCSV("data/FallGuysStats.csv")
-
+    print (len(CSV_Data))
     playerObject = Player(1)
-    print(playerObject.playerNumber)
+
 
     for line in CSV_Data:
+        if headerRow:
+            headerRow = False
+            continue
         print(line)
-        # TODO isolate the required cell information
-        # TODO create a process to isolate a round object data pack, and determine a way to access the final score
-        # playerObject.episodeList.append(Episode)
+        (timestamp, episodeNumber, roundData, roundOut, finalScore) = isolateCellsWithRoundDataAggregated(line)
+        roundObjectList = generateRoundObjects(roundData,episodeNumber)
+        playerObject.episodeList.append(Episode(len(roundObjectList),episodeNumber,finalScore,roundObjectList))
 
-    # TODO import csv file from hardcoded location
-    # TODO generate Player object
-    # TODO iterate through each line of the file, extracting objects along the way
+    for episode in playerObject.episodeList:
+        print("EPISODE #" + str(episode.episodeNumber)+":")
+        print("FINAL SCORE:" + str(episode.finalPlayerScore))
+        for currentRound in episode.listOfRounds:
+            print("\t" + currentRound.name + "; SCORE:" + str(currentRound.playerScore))
     # TODO output results to stdout
 
     return
@@ -33,6 +40,34 @@ def readListFromCSV(filePath):
         for line in fileIn:
             tempList.append(line.strip())
     return tempList
+
+def isolateCellsWithRoundDataAggregated(line):
+
+     return(str(line.split(",")[0]), #timestamp
+           str(line.split(",")[1]), #Episode number
+           line.split(",")[2:19], #Round data; will be parsed separately later
+           str(line.split(",")[20]), #Round out
+           str(line.split(",")[21]), #Final score
+    )
+
+def generateRoundObjects(roundData,episodeNumber):
+    roundObjects = list()
+    roundCounter = 1
+    remainingRoundData = roundData
+    while True:
+        currRound = remainingRoundData[:4]
+        if (currRound[1] == "" or roundCounter >=6):
+            break
+        tempRoundObj = Round(currRound[1], currRound[0], currRound[3], roundCounter, episodeNumber, currRound[2])
+        roundObjects.append(tempRoundObj)
+
+        roundCounter += 1
+        remainingRoundData = remainingRoundData[3:]
+    return roundObjects
+
+def verifyRoundNames(roundObj):
+    # TODO verification of round names
+    pass
 
 
 if __name__ == '__main__':
