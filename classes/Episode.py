@@ -6,7 +6,6 @@
 # Number of Solo Games
 # Final Placement Score
 
-# noinspection PyPep8Naming
 class Episode:
     """docstring for Episode"""
     totalNumberOfEpisodes = 0

@@ -1,6 +1,7 @@
 from classes.Player import Player
 from classes.Episode import Episode
 from classes.Round import Round
+from classes.PlayerEvent import PlayerEvent
 
 def generatePlayerObjectFromFile(filePath,playerNumber):
     print("hello world")
@@ -17,9 +18,33 @@ def generatePlayerObjectFromFile(filePath,playerNumber):
         print(line)
         (timestamp, episodeNumber, roundData, roundOut, finalScore) = isolateCellsWithRoundDataAggregated(line)
         roundObjectList = generateRoundObjects(roundData,episodeNumber)
+        # TODO for each round, update the PlayerEvent list
+        # TODO First, check to see if the event already exists in the list. If not, create new player event, add to list
+        # TODO  else, update the PlayerEvent object that has the corresponding event name
+            #TODO Add to the event frequency, number of wins/losses, average % needed to qualify
+        for roundItem in roundObjectList:
+            match = 0
+            for i in range(playerObject.eventList):
+                if roundItem.name == playerObject.eventList[i].eventName:
+                    playerObject.eventList[i] = updatePlayerEvent(playerObject.eventList[i], roundItem)
+                    match = 1
+
+            if (match == 0):
+                playerObject.eventList.append(PlayerEvent(roundItem.name))
         playerObject.episodeList.append(Episode(len(roundObjectList),episodeNumber,finalScore,roundObjectList))
 
     return playerObject
+
+
+def updatePlayerEvent(eventObject, roundObject):
+    # TODO: Fix sleepy brain code, need to calculate math and stuff here, replace variables
+    tempCombinedPlayerScore = eventObject.frequencyOfEventPlay * eventObject.averageScoreAsAPercent
+    eventObject.frequencyOfEventPlay += 1
+    tempCombinedPlayerScore += roundObject.playerScore
+    eventObject.averageScoreAsAPercent = tempCombinedPlayerScore / eventObject.frequencyOfEventPlay
+
+
+    return eventObject
 
 
 def readListFromCSV(filePath):

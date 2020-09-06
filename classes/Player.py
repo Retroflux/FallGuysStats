@@ -1,3 +1,5 @@
+from classes.PlayerEvent import PlayerEvent
+
 class Player:
     # TODO getter and setter for unique events
     totalUniqueEvents = 0
