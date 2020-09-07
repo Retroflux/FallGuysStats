@@ -2,10 +2,10 @@ class PlayerEvent:
 
     def __init__(self, eventName):
         self._eventName = eventName
-        self._frequencyOfEventPlay = 1
+        self._frequencyOfEventPlay = 0
         self._averageScoreAsAPercent = 0
         self._theoreticalScoreAsAPercentage = 0
-        self._averagePercentScoreNeededToQualify = 0
+        self._numberScoresUsedForTheoreticalScorePercentage = 0
         self._numberOfWins = 0
         self._numberOfLosses = 0
 
@@ -26,8 +26,8 @@ class PlayerEvent:
         return self._theoreticalScoreAsAPercentage
 
     @property
-    def averagePercentScoreNeededToQualify(self):
-        return self._averagePercentScoreNeededToQualify
+    def numberScoresUsedForTheoreticalScorePercentage(self):
+        return self._numberScoresUsedForTheoreticalScorePercentage
 
     @property
     def numberOfWins(self):
@@ -53,12 +53,12 @@ class PlayerEvent:
     def theoreticalScoreAsAPercentage(self, theoreticalScoreAsAPercentage):
         self._theoreticalScoreAsAPercentage = theoreticalScoreAsAPercentage
 
-    @averagePercentScoreNeededToQualify.setter
-    def averagePercentScoreNeededToQualify(self, averagePercentScoreNeededToQualify):
-        self._averagePercentScoreNeededToQualify = averagePercentScoreNeededToQualify
+    @numberScoresUsedForTheoreticalScorePercentage.setter
+    def numberScoresUsedForTheoreticalScorePercentage(self, numberScoresUsedForTheoreticalScorePercentage):
+        self._numberScoresUsedForTheoreticalScorePercentage = numberScoresUsedForTheoreticalScorePercentage
 
     @numberOfWins.setter
-    def numberOfWins(self,numberOfWins):
+    def numberOfWins(self, numberOfWins):
         self._numberOfWins = numberOfWins
 
     @numberOfLosses.setter

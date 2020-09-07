@@ -1,4 +1,4 @@
-from classes.PlayerEvent import PlayerEvent
+
 
 class Player:
     # TODO getter and setter for unique events
@@ -30,5 +30,5 @@ class Player:
         self._episodeList = episodeList
 
     @eventList.setter
-    def eventList(self,eventList):
+    def eventList(self, eventList):
         self._eventList = eventList

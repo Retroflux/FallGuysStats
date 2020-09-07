@@ -10,7 +10,8 @@ class Episode:
     """docstring for Episode"""
     totalNumberOfEpisodes = 0
 
-    def __init__(self, numberOfRounds, episodeNumber, finalPlayerScore, listOfRounds, numberOfTeamGames=0, numberOfSoloGames=0):
+    def __init__(self, numberOfRounds, episodeNumber, finalPlayerScore, listOfRounds, numberOfTeamGames=0,
+                 numberOfSoloGames=0):
         self._numberOfRounds = numberOfRounds
         self._episodeNumber = episodeNumber
         self._numberOfTeamGames = numberOfTeamGames
@@ -43,25 +44,25 @@ class Episode:
         return self._listOfRounds
 
     @numberOfRounds.setter
-    def numberOfRounds(self,numberOfRounds):
+    def numberOfRounds(self, numberOfRounds):
         self._numberOfRounds = numberOfRounds
 
     @episodeNumber.setter
-    def episodeNumber(self,episodeNumber):
+    def episodeNumber(self, episodeNumber):
         self._episodeNumber = episodeNumber
 
     @numberOfTeamGames.setter
-    def numberOfTeamGames(self,numberOfTeamGames):
+    def numberOfTeamGames(self, numberOfTeamGames):
         self._numberOfTeamGames = numberOfTeamGames
 
     @numberOfSoloGames.setter
-    def numberOfSoloGames(self,numberOfSoloGames):
+    def numberOfSoloGames(self, numberOfSoloGames):
         self._numberOfSoloGames = numberOfSoloGames
 
     @finalPlayerScore.setter
-    def finalPlayerScore(self,finalPlayerScore):
+    def finalPlayerScore(self, finalPlayerScore):
         self._finalPlayerScore = finalPlayerScore
 
     @listOfRounds.setter
-    def listOfRounds(self,listOfRounds):
+    def listOfRounds(self, listOfRounds):
         self._listOfRounds = listOfRounds
