@@ -51,13 +51,6 @@ def updateFrequencyAndScoreStats(eventObject, roundObject):
         eventObject.frequencyOfEventPlay += 1
         tempCombinedPlayerScore += float(roundObject.playerScore) / float(roundObject.startingParticipants)
         eventObject.averageScoreAsAPercent = tempCombinedPlayerScore / float(eventObject.frequencyOfEventPlay)
-        if eventObject.eventName == "Jinxed":
-            print()
-            print(roundObject.playerScore)
-            print(roundObject.startingParticipants)
-            print(float(roundObject.playerScore) / float(roundObject.startingParticipants))
-            print(tempCombinedPlayerScore)
-            print(eventObject.averageScoreAsAPercent)
     return eventObject
 
 

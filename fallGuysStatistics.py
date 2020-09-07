@@ -28,7 +28,7 @@ def outputPlayerStats(playerObject):
         print("\t\tNumber of Player Losses: " + str(eventItem.numberOfLosses))
         print("\t\tPlayer Win Percentage: " + str(
             eventItem.numberOfWins / (eventItem.numberOfWins + eventItem.numberOfLosses) * 100) + "%")
-        print("\t\tOn Average, players with a percent score less than %.3f%% pass through this course." % (
+        print("\t\tOn Average, players with a percent score greater than %.3f%% pass through this course." % (
                 eventItem.theoreticalScoreAsAPercentage * 100))
 
 
