@@ -34,6 +34,10 @@ def generatePlayerMetaStatistics(playerObject):
                     playerObject.eventList[i] = updateWinsAndLosses(playerObject.eventList[i], roundItem)
                     playerObject.eventList[i] = updateTheoreticalEventPercentages(playerObject.eventList[i], roundItem,
                                                                                   finalRoundFlag)
+                    playerObject.eventList[i].minStartingPlayers = updateLowerParticipantBound(
+                        playerObject.eventList[i], roundItem.startingParticipants)
+                    playerObject.eventList[i].maxStartingPlayers = updateUpperParticipantBound(
+                        playerObject.eventList[i], roundItem.startingParticipants)
                     match = 1
                     # break
             if match == 0:
@@ -89,6 +93,7 @@ def updateTheoreticalEventPercentages(eventObject, roundObject, finalRoundFlag):
     return eventObject
 
 
+
 def readListFromCSV(filePath):
     tempList = list()
     with open(filePath, "r") as fileIn:
@@ -124,3 +129,13 @@ def generateRoundObjects(roundData, episodeNumber):
 
 def verifyRoundNames(roundObj, roundNames):
     return True if roundObj.name in roundNames else False
+
+def updateLowerParticipantBound(eventObject, numberOfParticipants):
+    if int(eventObject.minStartingPlayers) > int(numberOfParticipants):
+        return numberOfParticipants
+    return eventObject.minStartingPlayers
+
+def updateUpperParticipantBound(eventObject, numberOfParticipants):
+    if int(eventObject.maxStartingPlayers) < int(numberOfParticipants):
+        return numberOfParticipants
+    return eventObject.maxStartingPlayers

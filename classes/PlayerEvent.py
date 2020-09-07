@@ -8,6 +8,8 @@ class PlayerEvent:
         self._numberScoresUsedForTheoreticalScorePercentage = 0
         self._numberOfWins = 0
         self._numberOfLosses = 0
+        self._minStartingPlayers = 99
+        self._maxStartingPlayers = 1
 
     @property
     def eventName(self):
@@ -37,6 +39,14 @@ class PlayerEvent:
     def numberOfLosses(self):
         return self._numberOfLosses
 
+    @property
+    def minStartingPlayers(self):
+        return self._minStartingPlayers
+
+    @property
+    def maxStartingPlayers(self):
+        return self._maxStartingPlayers
+
     @eventName.setter
     def eventName(self, eventName):
         self._eventName = eventName
@@ -64,3 +74,11 @@ class PlayerEvent:
     @numberOfLosses.setter
     def numberOfLosses(self, numberOfLosses):
         self._numberOfLosses = numberOfLosses
+
+    @minStartingPlayers.setter
+    def minStartingPlayers(self, minStartingPlayers):
+        self._minStartingPlayers = minStartingPlayers
+
+    @maxStartingPlayers.setter
+    def maxStartingPlayers(self, maxStartingPlayers):
+        self._maxStartingPlayers = maxStartingPlayers

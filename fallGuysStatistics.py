@@ -21,9 +21,11 @@ def outputEpisodeListData(playerObject):
 def outputPlayerStats(playerObject):
     for eventItem in playerObject.eventList:
         print("\tEVENT: " + eventItem.eventName)
+        print("\t\tMinimum Participants Required: %s" % eventItem.minStartingPlayers)
+        print("\t\tMaximum Participants Allowed: %s" % eventItem.maxStartingPlayers)
         print("\t\tFrequency of Event Play: " + str(eventItem.frequencyOfEventPlay))
-        # print("\t\tOn Average, this player places in the top %.3f%% of players in the games they "
-        #       "play" % (eventItem.averageScoreAsAPercent * 100))
+        print("\t\tOn Average, this player places in the top %.3f%% of players in the games they "
+              "play" % (eventItem.averageScoreAsAPercent * 100))
         print("\t\tNumber of Player Wins: " + str(eventItem.numberOfWins))
         print("\t\tNumber of Player Losses: " + str(eventItem.numberOfLosses))
         print("\t\tPlayer Win Percentage: " + str(
