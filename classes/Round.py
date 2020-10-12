@@ -8,6 +8,7 @@ class Round:
         self._roundNumber = roundNumber
         self._episodeNumber = episodeNumber
         self._playerScore = playerScore
+        self._playerAdvanced = True
 
     @property
     def name(self):
@@ -33,6 +34,10 @@ class Round:
     def playerScore(self):
         return self._playerScore
 
+    @property
+    def playerAdvanced(self):
+        return self._playerAdvanced
+
     @name.setter
     def name(self, name):
         self._name = name
@@ -56,6 +61,10 @@ class Round:
     @playerScore.setter
     def playerScore(self, playerScore):
         self._playerScore = playerScore
+
+    @playerAdvanced.setter
+    def playerAdvanced(self, playerAdvanced):
+        self._playerAdvanced = playerAdvanced
 
 # Name
 # Number of Participants

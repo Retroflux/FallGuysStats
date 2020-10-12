@@ -31,7 +31,7 @@ def generatePlayerMetaStatistics(playerObject):
             for i in range(len(playerObject.eventList)):
                 if roundItem.name == playerObject.eventList[i].eventName:  # already exists
                     playerObject.eventList[i] = updateFrequencyAndScoreStats(playerObject.eventList[i], roundItem)
-                    playerObject.eventList[i] = updateWinsAndLosses(playerObject.eventList[i], roundItem)
+                    playerObject.eventList[i] = updateWinsAndLosses(playerObject.eventList[i], roundItem,finalRoundFlag)
                     playerObject.eventList[i] = updateTheoreticalEventPercentages(playerObject.eventList[i], roundItem,
                                                                                   finalRoundFlag)
                     playerObject.eventList[i].minStartingPlayers = updateLowerParticipantBound(
@@ -43,7 +43,7 @@ def generatePlayerMetaStatistics(playerObject):
             if match == 0:
                 playerObject.eventList.append(PlayerEvent(roundItem.name))
                 playerObject.eventList[-1] = updateFrequencyAndScoreStats(playerObject.eventList[-1], roundItem)
-                playerObject.eventList[-1] = updateWinsAndLosses(playerObject.eventList[-1], roundItem)
+                playerObject.eventList[-1] = updateWinsAndLosses(playerObject.eventList[-1], roundItem, finalRoundFlag)
                 playerObject.eventList[-1] = updateTheoreticalEventPercentages(playerObject.eventList[-1], roundItem,
                                                                                finalRoundFlag)
     return playerObject
@@ -58,23 +58,19 @@ def updateFrequencyAndScoreStats(eventObject, roundObject):
     return eventObject
 
 
-def updateWinsAndLosses(eventObject, roundObject):
+def updateWinsAndLosses(eventObject, roundObject, finalRoundFlag):
     # win/losses
-    if roundObject.qualifyingParticipants == "":
-        if roundObject.playerScore != "":
-            if int(roundObject.playerScore) == 1:
-                eventObject.numberOfWins += 1
-            else:
-                eventObject.numberOfLosses += 1
-        else:
-            eventObject.numberOfLosses += 1
-    elif roundObject.qualifyingParticipants != "":
-        if roundObject.qualifyingParticipants >= roundObject.playerScore:
+    if roundObject.playerAdvanced == True:
+        eventObject.numberOfWins += 1
+    elif roundObject.playerAdvanced == False and finalRoundFlag == True:
+        if int(roundObject.playerScore) == 1:
             eventObject.numberOfWins += 1
         else:
             eventObject.numberOfLosses += 1
-    return eventObject
+    else:
+        eventObject.numberOfLosses += 1
 
+    return eventObject
 
 def updateTheoreticalEventPercentages(eventObject, roundObject, finalRoundFlag):
     # NOTE must omit first round in the average % score needed to qualify because the numbers are not accurate.
@@ -116,24 +112,30 @@ def generateRoundObjects(roundData, episodeNumber):
     roundCounter = 1
     remainingRoundData = roundData
     while True:
-        currRound = remainingRoundData[:4]
+        currRound = remainingRoundData[:5]
         if currRound[1] == "" or roundCounter >= 6:
             break
         tempRoundObj = Round(currRound[1], currRound[0], currRound[3], roundCounter, episodeNumber, currRound[2])
+        tempRoundObj.playerAdvanced = determineWinLossAtRoundObjectGeneration(currRound[4])
         roundObjects.append(tempRoundObj)
 
         roundCounter += 1
         remainingRoundData = remainingRoundData[3:]
     return roundObjects
 
+def determineWinLossAtRoundObjectGeneration(nextRoundName):
+    return False if nextRoundName == "" else True
+
 
 def verifyRoundNames(roundObj, roundNames):
     return True if roundObj.name in roundNames else False
+
 
 def updateLowerParticipantBound(eventObject, numberOfParticipants):
     if int(eventObject.minStartingPlayers) > int(numberOfParticipants):
         return numberOfParticipants
     return eventObject.minStartingPlayers
+
 
 def updateUpperParticipantBound(eventObject, numberOfParticipants):
     if int(eventObject.maxStartingPlayers) < int(numberOfParticipants):
